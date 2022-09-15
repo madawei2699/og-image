@@ -7,14 +7,12 @@ const twemoji = require('twemoji');
 const twOptions = { folder: 'svg', ext: '.svg' };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
-const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
+const lxgw = readFileSync(`${__dirname}/../_fonts/LXGWWenKai-Regular.woff2`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
     let foreground = 'black';
-    let radial = 'lightgray';
+    let radial = '#e5b751';
 
     if (theme === 'dark') {
         background = 'black';
@@ -23,25 +21,11 @@ function getCss(theme: string, fontSize: string) {
     }
     return `
     @font-face {
-        font-family: 'Inter';
+        font-family: 'LXGW';
         font-style:  normal;
         font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
+        src: url(data:font/woff2;charset=utf-8;base64,${lxgw}) format('woff2');
     }
-
-    @font-face {
-        font-family: 'Inter';
-        font-style:  normal;
-        font-weight: bold;
-        src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
-    }
-
-    @font-face {
-        font-family: 'Vera';
-        font-style: normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
-      }
 
     body {
         background: ${background};
@@ -93,9 +77,22 @@ function getCss(theme: string, fontSize: string) {
         margin: 0 .05em 0 .1em;
         vertical-align: -0.1em;
     }
+
+    .slogan {
+        background: -webkit-linear-gradient(45deg, #e5b751,#1677b3, #cc5595 80%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: 'LXGW', sans-serif;
+        font-size: 50px;
+        font-style: normal;
+        line-height: 1.8;
+    }
     
     .heading {
-        font-family: 'Inter', sans-serif;
+        background: -webkit-linear-gradient(45deg, #e5b751,#1677b3, #cc5595 80%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: 'LXGW', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         color: ${foreground};
@@ -121,6 +118,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                     getPlusSign(i) + getImage(img, widths[i], heights[i])
                 ).join('')}
             </div>
+            <div class="slogan">学习 / 技术 / 投资</div>
             <div class="spacer">
             <div class="heading">${emojify(
                 md ? marked(text) : sanitizeHtml(text)

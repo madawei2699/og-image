@@ -52,8 +52,8 @@ function getArray(stringOrArray: string[] | string | undefined): string[] {
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
     const defaultImage = theme === 'light'
-        ? 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg'
-        : 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg';
+        ? 'https://img.bmpi.dev/bmpi.png'
+        : 'https://img.bmpi.dev/bmpi.png';
 
     if (!images || !images[0]) {
         return [defaultImage];
