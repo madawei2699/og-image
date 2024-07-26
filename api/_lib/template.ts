@@ -118,7 +118,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                     getPlusSign(i) + getImage(img, widths[i], heights[i])
                 ).join('')}
             </div>
-            <div class="slogan">Build My (Personal Insights / Programming Insights / Passive Income)</div>
+            <div class="slogan">Build My (Personal Intelligence / Programming Insights / Passive Income)</div>
             <div class="spacer">
             <div class="heading">${emojify(
                 md ? marked(text) : sanitizeHtml(text)
