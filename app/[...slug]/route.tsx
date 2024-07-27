@@ -1,8 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 
-export const runtime = 'edge';
-
 const slogan = 'Build My #Personal_Intelligence #Programming_Insights #Passive_Income';
 
 export async function GET(
