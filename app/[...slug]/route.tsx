@@ -1,5 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
 const slogan = 'Build My #Personal_Intelligence #Programming_Insights #Passive_Income';
 
@@ -9,8 +11,9 @@ export async function GET(
 ): Promise<Response> {
   try {
     const slugString = params.slug.join('/');
-    const match = slugString.match(/^(.+?)(\.x(\d+))?\.png$/);
+    const match = slugString.match(/^(.+?)(\.x(\d+))?\.png$/u); // 使用 'u' 标志来处理 Unicode 字符
     if (!match) {
+      console.error('Invalid URL format:', slugString);
       throw new Error('Invalid URL format');
     }
 
@@ -29,10 +32,8 @@ export async function GET(
     // 加载自定义字体
     let fontData;
     try {
-      const fontResponse = await fetch(
-        new URL('../../public/LXGWWenKaiLite-Regular.ttf', import.meta.url)
-      );
-      fontData = await fontResponse.arrayBuffer();
+      const fontPath = path.resolve('./public/LXGWWenKaiLite-Regular.ttf');
+      fontData = fs.readFileSync(fontPath);
     } catch (fontError) {
       console.error('Failed to load custom font:', fontError);
       // 如果字体加载失败，使用系统字体
